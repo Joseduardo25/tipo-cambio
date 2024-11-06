@@ -9,7 +9,7 @@ import circleArrow from '../../public/assets/images/circle-arrow.png'
 
 
 const ExchangeRate = () => {
-  const [exchangeRate, setExchangeRate] = useState({ purchase_price: 3.774, sale_price: 3.760 });
+  const [exchangeRate, setExchangeRate] = useState({ purchase_price: 3.760, sale_price: 3.789 });
   const [amount, setAmount] = useState(0);
   const [result, setResult] = useState(0);
   const [isDollarToSol, setIsDollarToSol] = useState(true);
@@ -47,11 +47,9 @@ const ExchangeRate = () => {
 
   const calculateExchange = () => {
     if (isDollarToSol) {
-      // dolares x precio de venta
-      setResult((amount * exchangeRate.sale_price).toFixed(2));
+      setResult((amount * exchangeRate.purchase_price).toFixed(2));
     } else {
-      // SOles a dolares
-      setResult((amount / exchangeRate.purchase_price).toFixed(2));
+      setResult((amount / exchangeRate.sale_price).toFixed(2));
     }
   };
 
@@ -66,13 +64,13 @@ const ExchangeRate = () => {
           <span className={clsx(styles.buyRate, { [styles.DollarSelected]: isDollarSelected })}>
             Dólar compra <br />
             <span className={styles.ratesNum}>
-              {exchangeRate.purchase_price.toFixed(4)}
+              {exchangeRate.sale_price.toFixed(4)}
             </span>
           </span>
           <span className={clsx(styles.buyRate, { [styles.DollarSelected]: !isDollarSelected })}>
             Dólar venta <br />
             <span className={styles.ratesNum}>
-              {exchangeRate.sale_price.toFixed(4)}
+              {exchangeRate.purchase_price.toFixed(4)}
             </span>
           </span>
         </div>

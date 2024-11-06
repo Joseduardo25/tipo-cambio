@@ -9,11 +9,11 @@ import circleArrow from '../../public/assets/images/circle-arrow.png'
 
 
 const ExchangeRate = () => {
-  const [exchangeRate, setExchangeRate] = useState({ purchase_price: 3.760, sale_price: 3.774 });
+  const [exchangeRate, setExchangeRate] = useState({ purchase_price: 3.774, sale_price: 3.760 });
   const [amount, setAmount] = useState(0);
   const [result, setResult] = useState(0);
   const [isDollarToSol, setIsDollarToSol] = useState(true);
-  const [isDollarSelected, setIsDollarSelected] = useState(true);
+  const [isDollarSelected, setIsDollarSelected] = useState(false);
 
 
   useEffect(() => {
@@ -47,9 +47,11 @@ const ExchangeRate = () => {
 
   const calculateExchange = () => {
     if (isDollarToSol) {
-      setResult((amount * exchangeRate.purchase_price).toFixed(2));
+      // dolares x precio de venta
+      setResult((amount * exchangeRate.sale_price).toFixed(2));
     } else {
-      setResult((amount / exchangeRate.sale_price).toFixed(2));
+      // SOles a dolares
+      setResult((amount / exchangeRate.purchase_price).toFixed(2));
     }
   };
 

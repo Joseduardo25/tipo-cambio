@@ -1,0 +1,194 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+  background-color: #5a00b5;
+  background: linear-gradient(0deg, #6E46E6, #4A28AF);
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  @media (max-width: 430px) {
+    flex-direction: column;
+    gap: 25px;
+    justify-content: flex-start;
+    padding: 0;
+  }
+}
+
+.textSection {
+  color: #fff;
+  
+  @media (max-width: 430px) {
+    margin-top: 25px;
+  }
+
+  h1 {
+    max-width: 350px;
+    font-size: 48px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+
+    @media (max-width: 430px) {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+  }
+
+  p {
+    font-size: 24px;
+    max-width: 350px;
+    @media (max-width: 430px) {
+      font-size: 14px;
+      max-width: 211px;
+    }
+  }
+}
+
+.exchangeCard {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 29px 55px;
+  width: 386px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  @media (max-width: 430px) {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+}
+}
+
+.rates {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.875rem;
+  color: #717191;
+  text-align: center;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 140%;
+    height: 1px;
+    background-color: #E7E7ED;
+    left: -55px;
+    top: 33px;
+    @media (max-width: 430px) {
+      width: 138%;
+    }
+}
+}
+
+.ratesNum{
+  font-weight: 600;
+}
+
+.DollarSelected{
+  position: relative;
+  color: #2F00FF;
+
+    &::after {
+      position: absolute;
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      color: #2F00FF;
+      background-color: #2F00FF;
+  }
+}
+.exchangeForm {
+  display: flex;
+  align-items: center;
+  margin: 39px 0;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+
+  .amountBox {
+    border: solid 1px #6E46E6;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    margin: 0 0.5rem;
+    width: 100%;
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      color: #3D3D67;
+    }
+
+
+    span:first-child {
+      width: 110px;
+      background-color: #f7f7f7;
+      font-size: 0.875rem;
+      color: #6E46E6;
+      padding: 1rem;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+}
+
+    input {
+      border: none;
+      background: none;
+      outline: none;
+      text-align: center;
+      font-size: 1.25rem;
+      color: #333;
+      width: 100%;
+
+    }
+
+    span:last-child {
+      font-size: 1.25rem;
+      color: #333;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .exchangeIcon {
+    font-size: 1.5rem;
+    color: #5a00b5;
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: absolute;
+    top: 44px;
+  }
+}
+
+.startButton {
+  background-color: #6E46E6;
+  color: #fff;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  border: solid 1px #4A28AF;
+  cursor: pointer;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  
+  &:hover{
+    background-color: #4a009e;
+  }
+}

@@ -1,29 +1,32 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./connectdb/firebaseConfig";
 import clsx from 'clsx';
 import styles from './styles/ExchangeRate.module.scss';
 import Image from 'next/image';
-import circleArrow from '../../public/assets/images/circle-arrow.png'
-
+import circleArrow from '../../public/assets/images/circle-arrow.png';
+import {
+  setExchangeRate,
+  setAmount,
+  setResult,
+  setIsDollarToSol,
+  setIsDollarSelected,
+} from '../redux/slice/slice.js';
 
 const ExchangeRate = () => {
-  const [exchangeRate, setExchangeRate] = useState({ purchase_price: 3.760, sale_price: 3.789 });
-  const [amount, setAmount] = useState(0);
-  const [result, setResult] = useState(0);
-  const [isDollarToSol, setIsDollarToSol] = useState(true);
-  const [isDollarSelected, setIsDollarSelected] = useState(false);
-
+  const dispatch = useDispatch();
+  const { exchangeRate, amount, result, isDollarToSol, isDollarSelected } = useSelector(state => state.exchangeRate);
 
   useEffect(() => {
     const fetchExchangeRate = async () => {
       try {
         const docRef = doc(db, "rates", "TDmXIypgLKKfNggHHSnw");
         const docSnap = await getDoc(docRef);
-        if (docSnap) {
+        if (docSnap.exists()) {
           const data = docSnap.data();
-          setExchangeRate({ purchase_price: data.buy, sale_price: data.sell });
+          dispatch(setExchangeRate({ purchase_price: data.buy, sale_price: data.sell }));
         } else {
           console.log("No such document!");
         }
@@ -32,24 +35,24 @@ const ExchangeRate = () => {
       }
     };
     fetchExchangeRate();
-  }, []);
+  }, [dispatch]);
 
   const handleAmountChange = (e) => {
-    setAmount(e.target.value);
+    dispatch(setAmount(e.target.value));
   };
 
   const handleSwitch = () => {
-    setIsDollarToSol(!isDollarToSol);
-    setAmount(0);
-    setResult(0);
-    setIsDollarSelected(!isDollarSelected)
+    dispatch(setIsDollarToSol(!isDollarToSol));
+    dispatch(setAmount(0));
+    dispatch(setResult(0));
+    dispatch(setIsDollarSelected(!isDollarSelected));
   };
 
   const calculateExchange = () => {
     if (isDollarToSol) {
-      setResult((amount * exchangeRate.purchase_price).toFixed(2));
+      dispatch(setResult((amount * exchangeRate.purchase_price).toFixed(2)));
     } else {
-      setResult((amount / exchangeRate.sale_price).toFixed(2));
+      dispatch(setResult((amount / exchangeRate.sale_price).toFixed(2)));
     }
   };
 
